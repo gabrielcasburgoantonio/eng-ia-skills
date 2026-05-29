@@ -34,6 +34,8 @@ Um **Agent Harness** é o conjunto de configs + skills + regras + hooks que tran
 ├── CLAUDE.md                 regras do projeto + ponteiros para as skills do método
 ├── specs/                    specs SDD por feature (geradas depois por reversa-spec-sdd)
 │   └── .gitkeep
+├── tests/                    espelha src/ — testes vêm antes do código (TDD)
+│   └── .gitkeep
 └── .eng-ia/
     └── micro-decisoes.md     ledger de atritos/acordos humano-IA (gerido por eng-ia-micro-decisoes)
 ```
@@ -57,7 +59,12 @@ Injete esta seção (adapte ao stack detectado, não cole cru):
 - **Alta coesão, baixo acoplamento.** Um arquivo = uma responsabilidade. Arquivo pequeno
   = menos tokens por leitura = LLM menor e mais barato consegue atuar. Token é custo.
 - **Spec antes de código.** Toda feature começa por `specs/<feature>/` (use /reversa-spec-sdd).
-  Ambiguidade se resolve no texto, não em runtime.
+  Ambiguidade se resolve no texto, não em runtime. A spec pode ser múltiplos documentos
+  coesos (PRD, arquitetura, API, rules, tasks) em vez de um doc-monstro.
+- **TDD obrigatório.** Spec → Test → Code → Refactor. A IA gera o teste primeiro a partir
+  da spec (Red), depois o código que passa nele (Green), depois melhora (Refactor).
+  Testes vivem em `tests/` espelhando `src/`. Pirâmide: unitário → integração → contrato
+  → end-to-end → regressão (bug encontrado vira teste para nunca mais voltar).
 - **Cross-reference.** ID da spec no comentário do código; caminho do arquivo na spec.
 - **Padrões de projeto = vocabulário.** Nomeie o pattern para a IA implementar certo;
   não peça implementação artesanal.
@@ -67,10 +74,11 @@ Injete esta seção (adapte ao stack detectado, não cole cru):
   em `.eng-ia/micro-decisoes.md` (use /eng-ia-micro-decisoes).
 
 ### Qual skill em cada fase
-| Fase | Skill |
+| Fase | Skill / regra |
 |---|---|
 | Spec | /reversa-spec-sdd |
 | Tarefas | /reversa-to-do |
+| Teste primeiro | TDD obrigatório (regra acima) — gerar teste a partir da spec antes do código |
 | Código (5 Leis) | code-philosophy |
 | Quality gate | /eng-ia-quality-gate |
 | Memória | /eng-ia-micro-decisoes |
@@ -79,6 +87,7 @@ Injete esta seção (adapte ao stack detectado, não cole cru):
 ### 3. Criar a estrutura
 
 - `specs/.gitkeep` (vazio).
+- `tests/.gitkeep` (vazio). A estrutura deve espelhar `src/` quando ela existir.
 - `.eng-ia/micro-decisoes.md` com o cabeçalho do ledger (ver skill `eng-ia-micro-decisoes` para o formato exato).
 
 ### 4. Hooks (opcional, perguntar antes)

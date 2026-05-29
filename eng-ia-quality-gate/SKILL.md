@@ -43,6 +43,8 @@ Cada item é **pass/fail**. Falha não bloqueia automaticamente — vira um acha
 | Q7 | Cross-reference | O código aponta o ID da spec, e a spec aponta o arquivo? |
 | Q8 | Git | As mudanças estão em commits pequenos e descritivos? |
 | Q9 | Micro-decisão | Houve atrito/decisão de arquitetura nesta sessão que não foi registrado em `.eng-ia/micro-decisoes.md`? |
+| Q10 | TDD | Existe teste para o código entregue, e ele foi escrito antes (ou pelo menos junto)? Cobre as camadas relevantes da pirâmide (unitário/integração/contrato/end-to-end)? |
+| Q11 | Regressão | Bugs reportados nesta sessão (ou anteriores que tocaram este código) viraram caso de regressão em `tests/`? |
 
 ## Procedimento
 
@@ -71,6 +73,7 @@ Cada item é **pass/fail**. Falha não bloqueia automaticamente — vira um acha
 |---|---|---|
 | Q1 POO | PASS |
 | Q4 Token/tamanho | FAIL — services.py com 900 linhas |
+| Q10 TDD | FAIL — sem teste para parser de pedido |
 | ... | ... |
 
 ## Veredito

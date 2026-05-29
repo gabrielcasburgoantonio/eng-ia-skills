@@ -2,12 +2,12 @@
 name: eng-ia
 description: >
   Skill-índice do método de Engenharia de Software com Agentes Inteligentes do Prof. Sandeco Macedo.
-  Codifica o pipeline completo: requisitos -> spec (SDD) -> modelagem POO -> código -> quality gate -> micro-decisões,
-  com a tese central "IA + processo estruturado = software sustentável" (anti vibe-coding).
-  Use quando o usuário digitar "/eng-ia", "método Sandeco", "engenharia de IA", "como estruturar esse projeto com agente",
-  ou quando precisar decidir QUAL skill chamar em cada fase de um projeto assistido por IA.
-  Não gera artefato próprio: roteia para reversa-spec-sdd, reversa-to-do, code-philosophy, code-review,
-  eng-ia-bootstrap, eng-ia-micro-decisoes e eng-ia-quality-gate.
+  Codifica o pipeline completo: requisitos -> spec (SDD, múltiplos documentos) -> teste primeiro (TDD)
+  -> código -> quality gate -> micro-decisões, com a tese central "IA + processo estruturado = software
+  sustentável" (anti vibe-coding). Use quando o usuário digitar "/eng-ia", "método Sandeco", "engenharia
+  de IA", "como estruturar esse projeto com agente", ou quando precisar decidir QUAL skill chamar em cada
+  fase. Não gera artefato próprio: roteia para reversa-spec-sdd, reversa-to-do, code-philosophy,
+  code-review, eng-ia-bootstrap, eng-ia-micro-decisoes e eng-ia-quality-gate.
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
@@ -31,28 +31,31 @@ O oposto é o *vibe coding*: pedir código solto ao LLM, aceitar o que vier, e a
 Princípios que atravessam todas as fases:
 
 - **POO obrigatória.** Modelar em classes com responsabilidade única antes de gerar código.
-- **Alta coesão, baixo acoplamento.** Cada arquivo faz uma coisa. Arquivos pequenos = menos tokens por leitura = LLM menor (e mais barato) consegue atuar. **Token é custo.**
-- **Spec antes de código.** Ambiguidade vira bug. Resolva no texto, não no runtime.
+- **Alta coesão, baixo acoplamento.** Cada arquivo faz uma coisa. Arquivos pequenos = menos tokens por leitura = LLM menor (e mais barato) consegue atuar. **Token é custo.** O princípio vale TAMBÉM para a spec: quebrar em múltiplos documentos coesos (PRD, arquitetura, API, rules, tasks, testes) em vez de um documento-monstro.
+- **Spec antes de código.** Ambiguidade vira bug. Resolva no texto, não no runtime. A spec deixa de ser documentação e vira o centro do projeto — código é derivação dela.
+- **Teste antes do código (TDD).** Spec → Test → Code → Refactor (Red/Green/Refactor, XP/Kent Beck). A IA não tem a preguiça humana que matou o TDD nos anos 2010 — ela escreve o teste primeiro sem reclamar. Manutenção corretiva cai drasticamente.
 - **Padrões de projeto são vocabulário.** Você não implementa o pattern à mão; você o *nomeia* para a IA implementar certo.
 - **Skill ensina, hook vigia.** A skill ensina o agente a fazer algo novo; o hook é determinístico e intercepta o que o agente faz. O LLM pode ignorar um prompt; não pode ignorar um hook.
 - **Registrar o atrito.** Toda discordância/concordância humano-IA vira micro-decisão. A IA não lembra do passado; a memória institucional é escrita.
+- **Specs valem além de software.** O método se aplica a qualquer artefato gerado por IA: pesquisa científica, roteiro de vídeo, acervo técnico, etc.
 
 ## O pipeline e qual skill chamar em cada fase
 
 | Fase | O que fazer | Skill a chamar |
 |---|---|---|
-| 0. Bootstrap do projeto | Montar o Agent Harness (CLAUDE.md, specs/, regras globais, hooks opcionais) | **`eng-ia-bootstrap`** |
-| 1. Requisitos -> Spec | Decompor em componentes e escrever specs SDD com score | **`reversa-spec-sdd`** (ou `sdd-spec`) |
+| 0. Bootstrap do projeto | Montar o Agent Harness (CLAUDE.md, specs/, tests/, regras globais, hooks opcionais) | **`eng-ia-bootstrap`** |
+| 1. Requisitos -> Spec | Decompor em componentes e escrever specs SDD com score (múltiplos docs: PRD, arquitetura, API, rules) | **`reversa-spec-sdd`** (ou `sdd-spec`) |
 | 2. Quebra em tarefas | Tarefas atômicas T001/T002 com dependências e paralelismo | **`reversa-to-do`** |
-| 3. Modelagem + código | Aplicar as 5 Leis da Defesa Elegante ao gerar/revisar lógica | **`code-philosophy`** |
-| 4. Quality gate | Revisão antes de subir: corretude/segurança/perf/estilo + critérios Sandeco | **`eng-ia-quality-gate`** (que chama `code-review` + `code-philosophy`) |
+| 3a. Teste primeiro (TDD) | Escrever o teste a partir da spec antes do código. Red/Green/Refactor. Pirâmide: unitário → integração → contrato → end-to-end → regressão | (regra global no CLAUDE.md via `eng-ia-bootstrap`) |
+| 3b. Modelagem + código | Aplicar as 5 Leis da Defesa Elegante ao gerar/revisar lógica | **`code-philosophy`** |
+| 4. Quality gate | Revisão antes de subir: corretude/segurança/perf/estilo + critérios Sandeco + verificação de TDD | **`eng-ia-quality-gate`** (que chama `code-review` + `code-philosophy`) |
 | Transversal | Registrar atritos e acordos humano-IA ao longo de tudo | **`eng-ia-micro-decisoes`** |
 
 ## Como usar na prática
 
 1. **Projeto novo?** Comece por `/eng-ia-bootstrap`. Ele cria o harness e aponta para as próximas fases.
 2. **Já tem harness, vai começar uma feature?** `/reversa-spec-sdd` para a spec, depois `/reversa-to-do` para as tarefas.
-3. **Escrevendo código?** Mantenha as 5 Leis (`code-philosophy`) à mão. Cross-referencie: ID da spec no comentário do código, caminho do arquivo na spec.
+3. **Hora de codificar?** **Escreva o teste antes** (Red/Green/Refactor). A IA gera o teste a partir da spec, depois o código que passa nele. Mantenha as 5 Leis (`code-philosophy`) à mão. Cross-referencie: ID da spec no comentário do código, caminho do arquivo na spec.
 4. **Antes de commitar?** `/eng-ia-quality-gate`.
 5. **Discordou da IA, ou tomou uma decisão de arquitetura no meio do caminho?** Registre com `/eng-ia-micro-decisoes` — quatro linhas, ~30 tokens.
 
@@ -66,4 +69,4 @@ Ela só te diz onde você está no método e para onde ir.
 
 ## Referências de origem
 
-Método extraído das 8 videoaulas + livro do Prof. Sandeco Macedo. As novidades do curso (micro-decisões como metodologia, distinção skill-vs-hook, token-como-custo aplicado a coesão) estão concentradas na **aula 08** e foram a base das skills `eng-ia-micro-decisoes`, `eng-ia-bootstrap` e `eng-ia-quality-gate`.
+Método extraído das 9 videoaulas + livro do Prof. Sandeco Macedo. As novidades do curso (micro-decisões como metodologia, distinção skill-vs-hook, token-como-custo aplicado a coesão) estão concentradas na **aula 08** e foram a base das skills `eng-ia-micro-decisoes`, `eng-ia-bootstrap` e `eng-ia-quality-gate`. A **aula 09** aprofunda SDD (múltiplos documentos coesos, não-objetivos no PRD, specs para qualquer artefato) e introduz TDD com a pirâmide de 5 camadas (unitário, integração, contrato, end-to-end, regressão).

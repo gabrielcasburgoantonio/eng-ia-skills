@@ -1,6 +1,6 @@
 # 13-ai-engineering — Método Sandeco de Engenharia de Software com Agentes
 
-Skills próprias (autor: toni) destiladas do curso **"Engenharia de Software com Agentes Inteligentes"** do Prof. Sandeco Macedo — 8 videoaulas transcritas + livro homônimo.
+Skills próprias (autor: toni) destiladas do curso **"Engenharia de Software com Agentes Inteligentes"** do Prof. Sandeco Macedo — 9 videoaulas transcritas + livro homônimo.
 
 Tese central: **IA + processo estruturado = software sustentável** (o anti vibe-coding).
 
@@ -27,12 +27,13 @@ As 4 skills aqui preenchem só as **lacunas reais** do método Sandeco que nenhu
 ## Pipeline completo
 
 ```
-/eng-ia-bootstrap   →  monta o harness
-/reversa-spec-sdd   →  spec da feature           (skill existente)
-/reversa-to-do      →  tarefas atômicas          (skill existente)
-code-philosophy     →  5 Leis ao escrever        (skill existente)
-/eng-ia-quality-gate →  portão antes do commit
+/eng-ia-bootstrap   →  monta o harness (CLAUDE.md, specs/, tests/, .eng-ia/)
+/reversa-spec-sdd   →  spec da feature (múltiplos docs coesos)   (skill existente)
+/reversa-to-do      →  tarefas atômicas                          (skill existente)
+TDD                 →  teste antes do código (Red/Green/Refactor) — regra global no CLAUDE.md
+code-philosophy     →  5 Leis ao escrever                        (skill existente)
+/eng-ia-quality-gate →  portão antes do commit (inclui Q10/Q11 de TDD e regressão)
 /eng-ia-micro-decisoes → registra atritos (a qualquer momento)
 ```
 
-Fonte: transcrições em `Engenharia de IA - SANDECO/transcricoes/aula-01..08.txt`. As novidades (micro-decisões, skill-vs-hook, token-como-custo) concentram-se na **aula 08**.
+Fonte: transcrições em `Engenharia de IA - SANDECO/transcricoes/aula-01..09.txt`. As novidades (micro-decisões, skill-vs-hook, token-como-custo) concentram-se na **aula 08**. A **aula 09** aprofunda SDD (múltiplos documentos, não-objetivos no PRD, specs além de software) e introduz **TDD com a pirâmide de 5 camadas** (unitário, integração, contrato, end-to-end, regressão).
