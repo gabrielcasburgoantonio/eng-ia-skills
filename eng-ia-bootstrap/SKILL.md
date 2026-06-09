@@ -1,31 +1,26 @@
 ---
 name: eng-ia-bootstrap
-description: >
-  Monta o Agent Harness de um projeto novo (ou retrofita um existente) segundo o método Sandeco:
-  cria/atualiza o CLAUDE.md com as regras globais de engenharia (POO obrigatória, alta coesão/baixo acoplamento,
-  token=custo, spec antes de código, git obrigatório), cria a estrutura specs/ e .eng-ia/, e aponta qual skill
-  usar em cada fase. Use quando o usuário digitar "/eng-ia-bootstrap", "configura o harness desse projeto",
-  "prepara esse projeto pra trabalhar com agente", ou ao iniciar qualquer projeto novo que vá usar o método eng-ia.
-  Entrega: CLAUDE.md, specs/.gitkeep, .eng-ia/micro-decisoes.md e um resumo dos próximos passos.
+description: 'Monta o Agent Harness do projeto (metodo Sandeco): cria CLAUDE.md com regras (POO, coesao, TDD obrigatorio), specs/, tests/ espelhando src/, .eng-ia/micro-decisoes.md. Acione com: /eng-ia-bootstrap, configura harness, prepara projeto pra agente, projeto novo eng-ia.'
 license: MIT
-compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
   author: toni
-  version: "1.0.0"
+  version: 1.0.0
   framework: eng-ia
   role: setup
-  phase: "0-bootstrap"
-  source: "Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo), aula 08 (Agent Harness)"
+  phase: 0-bootstrap
+  source: Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo), aulas 08 e 10 (Agent Harness)
+  compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 ---
 
 # eng-ia-bootstrap, montar o Agent Harness
 
-Um **Agent Harness** é o conjunto de configs + skills + regras + hooks que transforma um agente genérico num agente especializado para o seu projeto. Esta skill monta esse arnês.
+Um **Agent Harness** e o conjunto de mecanismos que toca o modelo/agente e ajuda, guia, controla, verifica ou facilita sua execucao. Isso inclui configs, skills, regras, hooks, contexto, memoria, ferramentas, testes, guardrails e fallback. Esta skill monta a estrutura concreta desse arnes no projeto.
 
 ## Quando rodar
 
 - Projeto novo que vai usar o método eng-ia.
 - Projeto existente sem `CLAUDE.md` (ou com um fraco) que você quer colocar nos trilhos.
+- Se você ainda não sabe quais mecanismos o agente precisa, rode `eng-ia-agent-harness` antes deste bootstrap.
 
 ## O que ela cria
 
@@ -108,3 +103,4 @@ Imprima um resumo: o que foi criado, e a sequência recomendada — `/reversa-sp
 - Não sobrescrever CLAUDE.md existente sem mostrar o diff.
 - Não inicializar git, instalar hooks ou criar arquivos fora do projeto sem confirmar.
 - Não gerar specs aqui — isso é fase 1 (`reversa-spec-sdd`).
+

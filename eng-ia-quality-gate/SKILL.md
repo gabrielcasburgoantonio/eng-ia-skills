@@ -1,21 +1,15 @@
 ---
 name: eng-ia-quality-gate
-description: >
-  Portão de qualidade antes de subir código, no método Sandeco. É um agregador leve: chama code-review
-  (corretude/segurança/performance/estilo com gravidade) e code-philosophy (as 5 Leis da Defesa Elegante),
-  e por cima aplica o checklist de manutenibilidade do método eng-ia (POO? coesão/acoplamento? padrão correto?
-  spec existe e está cross-referenciada? git usado? arquivos pequenos = menos tokens?). Use quando o usuário
-  digitar "/eng-ia-quality-gate", "revisa antes de commitar", "passou no quality gate?", ou antes de qualquer
-  commit/PR num projeto eng-ia. Entrega: veredito pass/fail por critério, sem reimplementar análise de AST.
+description: 'Portão pré-commit do método Sandeco. Agregador: chama code-review + code-philosophy + checklist Q1-Q11 (POO, coesão, TDD, regressão, spec, git). Entrega veredito pass/fail. Acione com: /eng-ia-quality-gate, revisa antes de commitar, quality gate.'
 license: MIT
-compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
   author: toni
-  version: "1.0.0"
+  version: 1.0.0
   framework: eng-ia
   role: quality-gate
-  phase: "4-pre-commit"
-  source: "Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo)"
+  phase: 4-pre-commit
+  source: Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo)
+  compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 ---
 
 # eng-ia-quality-gate, portão antes de subir
@@ -51,7 +45,7 @@ Cada item é **pass/fail**. Falha não bloqueia automaticamente — vira um acha
 1. Determinar o escopo (diff staged, arquivos tocados na sessão, ou alvo que o usuário indicar).
 2. Rodar `code-review` no escopo. Coletar achados com gravidade.
 3. Rodar a aderência de `code-philosophy` (5 Leis).
-4. Percorrer o checklist Q1–Q9.
+4. Percorrer o checklist Q1–Q11.
 5. Emitir o veredito consolidado (formato abaixo).
 6. Se Q9 falhou, sugerir `/eng-ia-micro-decisoes` antes do commit.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eng-IA Agent Harness"
+  short_description: "Projetar e avaliar o harness de um agente antes da execução."
+  default_prompt: "Use esta skill para desenhar ou auditar o Agent Harness de um projeto, agente ou fluxo com LLM."

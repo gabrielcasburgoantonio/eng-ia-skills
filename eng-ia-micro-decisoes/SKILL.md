@@ -1,20 +1,14 @@
 ---
 name: eng-ia-micro-decisoes
-description: >
-  Registra micro-decisões — a metodologia nova do Prof. Sandeco para dar memória institucional a projetos
-  assistidos por IA. Cada entrada tem quatro linhas (~30 tokens): qual foi o problema, qual foi o atrito,
-  quem resolveu, quem aprovou. Use quando o usuário digitar "/eng-ia-micro-decisoes", "registra essa decisão",
-  "anota esse atrito", ou sempre que houver discordância/concordância relevante entre humano e IA, ou uma
-  escolha de arquitetura que o futuro-você (ou a IA, que não lembra do passado) vai precisar reconstituir.
-  Entrega: append em `.eng-ia/micro-decisoes.md`.
+description: 'Registra micro-decisões (método Sandeco aula 8): 4 linhas por entrada — problema, atrito, quem resolveu, quem aprovou. Append em .eng-ia/micro-decisoes.md. Acione com: /eng-ia-micro-decisoes, registra essa decisão, anota esse atrito, atrito humano-IA.'
 license: MIT
-compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
   author: toni
-  version: "1.0.0"
+  version: 1.0.0
   framework: eng-ia
   role: memory-ledger
-  source: "Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo), aula 08 (micro-decisões)"
+  source: Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo), aula 08 (micro-decisões)
+  compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 ---
 
 # eng-ia-micro-decisoes, memória institucional do projeto

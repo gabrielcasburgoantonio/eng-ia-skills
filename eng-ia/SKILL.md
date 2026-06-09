@@ -1,21 +1,14 @@
 ---
 name: eng-ia
-description: >
-  Skill-índice do método de Engenharia de Software com Agentes Inteligentes do Prof. Sandeco Macedo.
-  Codifica o pipeline completo: requisitos -> spec (SDD, múltiplos documentos) -> teste primeiro (TDD)
-  -> código -> quality gate -> micro-decisões, com a tese central "IA + processo estruturado = software
-  sustentável" (anti vibe-coding). Use quando o usuário digitar "/eng-ia", "método Sandeco", "engenharia
-  de IA", "como estruturar esse projeto com agente", ou quando precisar decidir QUAL skill chamar em cada
-  fase. Não gera artefato próprio: roteia para reversa-spec-sdd, reversa-to-do, code-philosophy,
-  code-review, eng-ia-bootstrap, eng-ia-micro-decisoes e eng-ia-quality-gate.
+description: 'Skill-indice do metodo Sandeco (Engenharia de Software com Agentes). Roteia qual skill chamar em cada fase: Agent Harness, spec SDD, teste TDD, codigo e quality gate. Nao gera artefato. Acione com: /eng-ia, metodo Sandeco, engenharia de IA, agent harness, qual skill usar.'
 license: MIT
-compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
   author: toni
-  version: "1.0.0"
+  version: 1.0.0
   framework: eng-ia
   role: index-router
-  source: "Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo), aulas 01-08 + livro homônimo"
+  source: Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo), aulas 01-10 + livro homônimo
+  compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 ---
 
 # eng-ia, o método de Engenharia de Software com Agentes Inteligentes
@@ -33,6 +26,7 @@ Princípios que atravessam todas as fases:
 - **POO obrigatória.** Modelar em classes com responsabilidade única antes de gerar código.
 - **Alta coesão, baixo acoplamento.** Cada arquivo faz uma coisa. Arquivos pequenos = menos tokens por leitura = LLM menor (e mais barato) consegue atuar. **Token é custo.** O princípio vale TAMBÉM para a spec: quebrar em múltiplos documentos coesos (PRD, arquitetura, API, rules, tasks, testes) em vez de um documento-monstro.
 - **Spec antes de código.** Ambiguidade vira bug. Resolva no texto, não no runtime. A spec deixa de ser documentação e vira o centro do projeto — código é derivação dela.
+- **Harness antes de execucao.** Spec sozinha e prompt; modelo sozinho e forca bruta. Agent Harness e o conjunto de mecanismos que toca o modelo/agente e guia, verifica, limita, conecta ou recupera a execucao.
 - **Teste antes do código (TDD).** Spec → Test → Code → Refactor (Red/Green/Refactor, XP/Kent Beck). A IA não tem a preguiça humana que matou o TDD nos anos 2010 — ela escreve o teste primeiro sem reclamar. Manutenção corretiva cai drasticamente.
 - **Padrões de projeto são vocabulário.** Você não implementa o pattern à mão; você o *nomeia* para a IA implementar certo.
 - **Skill ensina, hook vigia.** A skill ensina o agente a fazer algo novo; o hook é determinístico e intercepta o que o agente faz. O LLM pode ignorar um prompt; não pode ignorar um hook.
@@ -43,7 +37,8 @@ Princípios que atravessam todas as fases:
 
 | Fase | O que fazer | Skill a chamar |
 |---|---|---|
-| 0. Bootstrap do projeto | Montar o Agent Harness (CLAUDE.md, specs/, tests/, regras globais, hooks opcionais) | **`eng-ia-bootstrap`** |
+| -1. Desenho do harness | Auditar se há contexto, memória, loop, ferramentas, verificação, guardrails, fallback e observabilidade suficientes | **`eng-ia-agent-harness`** |
+| 0. Bootstrap do projeto | Montar a estrutura concreta do Agent Harness no projeto (CLAUDE.md, specs/, tests/, regras globais, hooks opcionais) | **`eng-ia-bootstrap`** |
 | 1. Requisitos -> Spec | Decompor em componentes e escrever specs SDD com score (múltiplos docs: PRD, arquitetura, API, rules) | **`reversa-spec-sdd`** (ou `sdd-spec`) |
 | 2. Quebra em tarefas | Tarefas atômicas T001/T002 com dependências e paralelismo | **`reversa-to-do`** |
 | 3a. Teste primeiro (TDD) | Escrever o teste a partir da spec antes do código. Red/Green/Refactor. Pirâmide: unitário → integração → contrato → end-to-end → regressão | (regra global no CLAUDE.md via `eng-ia-bootstrap`) |
@@ -53,7 +48,7 @@ Princípios que atravessam todas as fases:
 
 ## Como usar na prática
 
-1. **Projeto novo?** Comece por `/eng-ia-bootstrap`. Ele cria o harness e aponta para as próximas fases.
+1. **Projeto novo ou agente novo?** Se a arquitetura do agente ainda está nebulosa, comece por `/eng-ia-agent-harness`. Se a decisão já está clara, rode `/eng-ia-bootstrap` para criar a estrutura no projeto.
 2. **Já tem harness, vai começar uma feature?** `/reversa-spec-sdd` para a spec, depois `/reversa-to-do` para as tarefas.
 3. **Hora de codificar?** **Escreva o teste antes** (Red/Green/Refactor). A IA gera o teste a partir da spec, depois o código que passa nele. Mantenha as 5 Leis (`code-philosophy`) à mão. Cross-referencie: ID da spec no comentário do código, caminho do arquivo na spec.
 4. **Antes de commitar?** `/eng-ia-quality-gate`.
@@ -70,3 +65,4 @@ Ela só te diz onde você está no método e para onde ir.
 ## Referências de origem
 
 Método extraído das 9 videoaulas + livro do Prof. Sandeco Macedo. As novidades do curso (micro-decisões como metodologia, distinção skill-vs-hook, token-como-custo aplicado a coesão) estão concentradas na **aula 08** e foram a base das skills `eng-ia-micro-decisoes`, `eng-ia-bootstrap` e `eng-ia-quality-gate`. A **aula 09** aprofunda SDD (múltiplos documentos coesos, não-objetivos no PRD, specs para qualquer artefato) e introduz TDD com a pirâmide de 5 camadas (unitário, integração, contrato, end-to-end, regressão).
+
