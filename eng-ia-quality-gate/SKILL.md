@@ -1,6 +1,6 @@
 ---
 name: eng-ia-quality-gate
-description: 'Portão pré-commit do método Sandeco. Agregador: chama code-review + code-philosophy + checklist Q1-Q11 (POO, coesão, TDD, regressão, spec, git). Entrega veredito pass/fail. Acione com: /eng-ia-quality-gate, revisa antes de commitar, quality gate.'
+description: 'Portão pré-commit do método Sandeco. Agregador: chama code-review + code-philosophy + checklist Q1-Q13 (POO, coesão, TDD, regressão, spec, git, segredos/pre-commit, loop seguro). Entrega veredito pass/fail. Acione com: /eng-ia-quality-gate, revisa antes de commitar, quality gate.'
 license: MIT
 metadata:
   author: toni
@@ -39,13 +39,15 @@ Cada item é **pass/fail**. Falha não bloqueia automaticamente — vira um acha
 | Q9 | Micro-decisão | Houve atrito/decisão de arquitetura nesta sessão que não foi registrado em `.eng-ia/micro-decisoes.md`? |
 | Q10 | TDD | Existe teste para o código entregue, e ele foi escrito antes (ou pelo menos junto)? Cobre as camadas relevantes da pirâmide (unitário/integração/contrato/end-to-end)? |
 | Q11 | Regressão | Bugs reportados nesta sessão (ou anteriores que tocaram este código) viraram caso de regressão em `tests/`? |
+| Q12 | Segredos & pre-commit | Nenhuma chave/API/segredo no diff? Há `.pre-commit` com secret-scan + format (ruff) barrando o commit? Repo privado? (aula 14) |
+| Q13 | Loop seguro | Se há loop de agente (`/go`, reflection), ele tem aferidor de saída, fuga/stop-early e verificador testado? Meta subjetiva usa 2º LLM como juiz? (aula 12 — ver `eng-ia-loop`) |
 
 ## Procedimento
 
 1. Determinar o escopo (diff staged, arquivos tocados na sessão, ou alvo que o usuário indicar).
 2. Rodar `code-review` no escopo. Coletar achados com gravidade.
 3. Rodar a aderência de `code-philosophy` (5 Leis).
-4. Percorrer o checklist Q1–Q11.
+4. Percorrer o checklist Q1–Q13.
 5. Emitir o veredito consolidado (formato abaixo).
 6. Se Q9 falhou, sugerir `/eng-ia-micro-decisoes` antes do commit.
 

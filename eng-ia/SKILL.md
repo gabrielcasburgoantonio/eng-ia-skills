@@ -7,7 +7,7 @@ metadata:
   version: 1.0.0
   framework: eng-ia
   role: index-router
-  source: Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo), aulas 01-10 + livro homônimo
+  source: Curso 'Engenharia de Software com Agentes Inteligentes' (Prof. Sandeco Macedo), aulas 01-14 + livro homônimo (final, 165p)
   compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 ---
 
@@ -39,11 +39,13 @@ Princípios que atravessam todas as fases:
 |---|---|---|
 | -1. Desenho do harness | Auditar se há contexto, memória, loop, ferramentas, verificação, guardrails, fallback e observabilidade suficientes | **`eng-ia-agent-harness`** |
 | 0. Bootstrap do projeto | Montar a estrutura concreta do Agent Harness no projeto (CLAUDE.md, specs/, tests/, regras globais, hooks opcionais) | **`eng-ia-bootstrap`** |
-| 1. Requisitos -> Spec | Decompor em componentes e escrever specs SDD com score (múltiplos docs: PRD, arquitetura, API, rules) | **`reversa-spec-sdd`** (ou `sdd-spec`) |
+| 1. Requisitos -> Spec | Decompor em componentes e escrever specs SDD com score (múltiplos docs: PRD, arquitetura, API, rules) | **`reversa-spec-sdd`** (ou `sdd-spec`) — ou **`eng-ia-frameworks`** para escolher/operar BMAD/SpecKit/Reversa |
 | 2. Quebra em tarefas | Tarefas atômicas T001/T002 com dependências e paralelismo | **`reversa-to-do`** |
 | 3a. Teste primeiro (TDD) | Escrever o teste a partir da spec antes do código. Red/Green/Refactor. Pirâmide: unitário → integração → contrato → end-to-end → regressão | (regra global no CLAUDE.md via `eng-ia-bootstrap`) |
 | 3b. Modelagem + código | Aplicar as 5 Leis da Defesa Elegante ao gerar/revisar lógica | **`code-philosophy`** |
 | 4. Quality gate | Revisão antes de subir: corretude/segurança/perf/estilo + critérios Sandeco + verificação de TDD | **`eng-ia-quality-gate`** (que chama `code-review` + `code-philosophy`) |
+| 5. Deploy | Colocar no ar (Docker → VPS → CI/CD), com segredos e branch/PR protegidos | (DevOps; ver nota das aulas 13-14 — pre-commit/secret-scan no `eng-ia-quality-gate`) |
+| Transversal | Automatizar tarefa iterativa (meta + verificação + fuga) em loop seguro | **`eng-ia-loop`** |
 | Transversal | Registrar atritos e acordos humano-IA ao longo de tudo | **`eng-ia-micro-decisoes`** |
 
 ## Como usar na prática
@@ -64,5 +66,5 @@ Ela só te diz onde você está no método e para onde ir.
 
 ## Referências de origem
 
-Método extraído das 9 videoaulas + livro do Prof. Sandeco Macedo. As novidades do curso (micro-decisões como metodologia, distinção skill-vs-hook, token-como-custo aplicado a coesão) estão concentradas na **aula 08** e foram a base das skills `eng-ia-micro-decisoes`, `eng-ia-bootstrap` e `eng-ia-quality-gate`. A **aula 09** aprofunda SDD (múltiplos documentos coesos, não-objetivos no PRD, specs para qualquer artefato) e introduz TDD com a pirâmide de 5 camadas (unitário, integração, contrato, end-to-end, regressão).
+Método extraído das 14 videoaulas + livro final do Prof. Sandeco Macedo. As novidades do curso (micro-decisões como metodologia, distinção skill-vs-hook, token-como-custo aplicado a coesão) estão concentradas na **aula 08** e foram a base das skills `eng-ia-micro-decisoes`, `eng-ia-bootstrap` e `eng-ia-quality-gate`. A **aula 09** aprofunda SDD (múltiplos documentos coesos, não-objetivos no PRD, specs para qualquer artefato) e introduz TDD com a pirâmide de 5 camadas (unitário, integração, contrato, end-to-end, regressão). A **aula 10** define Agent Harness com rigor (`eng-ia-agent-harness`). A **aula 11** traz os frameworks BMAD/SpecKit/Reversa (`eng-ia-frameworks`). A **aula 12** traz a engenharia de looping (`eng-ia-loop`). As **aulas 13-14** fecham o livro com DevContainer + YOLO (execução autônoma segura) e deploy em VPS (Docker/Git/CI-CD).
 

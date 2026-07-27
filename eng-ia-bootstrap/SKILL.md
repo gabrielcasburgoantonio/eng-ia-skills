@@ -64,7 +64,10 @@ Injete esta seção (adapte ao stack detectado, não cole cru):
 - **Padrões de projeto = vocabulário.** Nomeie o pattern para a IA implementar certo;
   não peça implementação artesanal.
 - **Git obrigatório.** Commits pequenos e descritivos. Nada sobe sem passar pelo
-  /eng-ia-quality-gate.
+  /eng-ia-quality-gate. Segredos nunca no repo; repo privado por padrão.
+- **Execução autônoma segura.** YOLO (`--dangerously-skip-permissions`) só dentro de
+  DevContainer (nunca em terminal comum). Para restringir escopo, use diretiva no
+  CLAUDE.md ("nunca altere a pasta X"), não permissão. Ver /eng-ia-agent-harness.
 - **Registre o atrito.** Discordâncias e decisões de arquitetura viram micro-decisões
   em `.eng-ia/micro-decisoes.md` (use /eng-ia-micro-decisoes).
 
@@ -93,6 +96,11 @@ Hooks são determinísticos: o LLM pode ignorar um prompt, não pode ignorar um 
 - **PostToolUse / Bash(git commit)**: lembrar de registrar micro-decisão se houve discordância na sessão.
 
 Se o usuário aceitar, instale em `.claude/settings.json` do projeto (não no global) e descreva o que cada hook faz.
+
+Ofereça também (sem instalar sem consentimento), quando o stack pedir:
+
+- **`.pre-commit-config.yaml`**: secret-scan (bloqueia commit com chave/API), format (ruff/prettier), remove imports não usados. É o guardrail determinístico do Q12 (aula 14).
+- **`.devcontainer/devcontainer.json` mínimo**: para rodar o agente isolado (execução autônoma segura, aula 13). O próprio agente amplia/restringe depois.
 
 ### 5. Fechar com os próximos passos
 

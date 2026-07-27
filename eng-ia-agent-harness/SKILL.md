@@ -127,7 +127,18 @@ Use este formato:
 - Use `cinturao-regressao` quando o harness precisar prender bug recorrente em teste permanente.
 - Use `eng-ia-quality-gate` para verificar antes de commit/entrega.
 - Use `eng-ia-micro-decisoes` quando houver decisao sobre trade-off de harness.
+- Use `eng-ia-frameworks` quando o harness for operado por um framework SDD (BMAD/SpecKit/Reversa).
+- Use `eng-ia-loop` quando a camada de loop/verificacao precisar ser projetada em detalhe.
+
+## Execucao autonoma segura (sandbox concreto — aula 13)
+
+O guardrail de sandbox/limite de pasta se materializa em **DevContainer + YOLO mode**:
+
+- **DevContainer** (extensao Dev Containers no VS Code + Docker) isola o agente numa "gaiola" descartavel. Rode o agente dentro dele.
+- **YOLO** (`--dangerously-skip-permissions`) so **dentro de container** — recomendacao oficial da Anthropic. Em terminal comum, o agente pode apagar/estragar arquivos.
+- **Diretiva != permissao**: para restringir escopo, use diretiva no CLAUDE.md ("nunca altere a pasta X"; "nunca peca chave de API"), como faz o Reversa com o legado.
+- **Contexto**: o "1M de tokens" e marketing; na pratica ~250k degrada. Use `/clear`, `/compact`, memoria (ecoa o loop de Ralph).
 
 ## Origem pedagogica
 
-Destilado da aula 10 do curso Engenharia de Software com Agentes Inteligentes, Prof. Sandeco Macedo. BMAD, SpecKit e Reversa especifico foram citados como tema da proxima aula; nao use esta skill como guia BMAD/SpecKit enquanto esse conteudo nao for analisado.
+Destilado das aulas 10 e 13 do curso Engenharia de Software com Agentes Inteligentes, Prof. Sandeco Macedo. Os frameworks BMAD/SpecKit/Reversa (aula 11) tem skill propria: `eng-ia-frameworks`.
