@@ -39,12 +39,13 @@ Princípios que atravessam todas as fases:
 |---|---|---|
 | -1. Desenho do harness | Auditar se há contexto, memória, loop, ferramentas, verificação, guardrails, fallback e observabilidade suficientes | **`eng-ia-agent-harness`** |
 | 0. Bootstrap do projeto | Montar a estrutura concreta do Agent Harness no projeto (CLAUDE.md, specs/, tests/, regras globais, hooks opcionais) | **`eng-ia-bootstrap`** |
-| 1. Requisitos -> Spec | Decompor em componentes e escrever specs SDD com score (múltiplos docs: PRD, arquitetura, API, rules) | **`reversa-spec-sdd`** (ou `sdd-spec`) — ou **`eng-ia-frameworks`** para escolher/operar BMAD/SpecKit/Reversa |
+| 0.5 Ideia -> brief | Ideia ainda bruta: clarear problema, valor, público, premissas perigosas antes de especificar | **Ideation Team do Reversa** (`/reversa-new`) — mais enxuto que o brainstorm do BMAD |
+| 1. Requisitos -> Spec | Decompor em componentes e escrever specs SDD com score (múltiplos docs: PRD, arquitetura, API, rules) | **`reversa-spec-sdd`** (ou `sdd-spec`) — ou **`eng-ia-frameworks`** para escolher/operar BMAD/SpecKit/Reversa. Delta pequeno numa base já entendida: **`reversa-code-express`** |
 | 2. Quebra em tarefas | Tarefas atômicas T001/T002 com dependências e paralelismo | **`reversa-to-do`** |
 | 3a. Teste primeiro (TDD) | Escrever o teste a partir da spec antes do código. Red/Green/Refactor. Pirâmide: unitário → integração → contrato → end-to-end → regressão | (regra global no CLAUDE.md via `eng-ia-bootstrap`) |
 | 3b. Modelagem + código | Aplicar as 5 Leis da Defesa Elegante ao gerar/revisar lógica | **`code-philosophy`** |
 | 4. Quality gate | Revisão antes de subir: corretude/segurança/perf/estilo + critérios Sandeco + verificação de TDD | **`eng-ia-quality-gate`** (que chama `code-review` + `code-philosophy`) |
-| 5. Deploy | Colocar no ar (Docker → VPS → CI/CD), com segredos e branch/PR protegidos | (DevOps; ver nota das aulas 13-14 — pre-commit/secret-scan no `eng-ia-quality-gate`) |
+| 5. Deploy | Colocar no ar (Docker → VPS → CI/CD), com segredos e branch/PR protegidos | **`eng-ia-deploy`** (aula 14) |
 | Transversal | Automatizar tarefa iterativa (meta + verificação + fuga) em loop seguro | **`eng-ia-loop`** |
 | Transversal | Registrar atritos e acordos humano-IA ao longo de tudo | **`eng-ia-micro-decisoes`** |
 

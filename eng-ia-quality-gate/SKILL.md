@@ -22,6 +22,8 @@ Agregador. **Não reimplementa** revisão de código nem análise estática — 
 2. **`code-philosophy`** — as 5 Leis da Defesa Elegante (Guard Clauses, Parse Don't Validate, Atomic Predictability, Fail Fast, Intentional Naming).
 3. **Checklist Sandeco** (abaixo) — o que o método exige além de "o código funciona".
 
+> **Executores opcionais (quando um achado precisa virar correção):** o quality-gate **aponta**, mas os agentes de qualidade do Reversa v1.3.2 **executam** a correção concreta — `reversa-refactor`, `reversa-optimize`, `reversa-prune`, `reversa-simplify`, `reversa-standardize`, `reversa-audit`. Bug recorrente vira teste permanente com `cinturao-regressao`.
+
 ## Checklist de manutenibilidade (critérios eng-ia)
 
 Cada item é **pass/fail**. Falha não bloqueia automaticamente — vira um achado que o humano decide.

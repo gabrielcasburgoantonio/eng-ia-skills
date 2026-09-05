@@ -4,7 +4,7 @@ Skills próprias (autor: toni) destiladas do curso **"Engenharia de Software com
 
 Tese central: **IA + processo estruturado = software sustentável** (o anti vibe-coding).
 
-## As 7 skills
+## As 8 skills
 
 | Skill | Papel | Fase |
 |---|---|---|
@@ -15,6 +15,7 @@ Tese central: **IA + processo estruturado = software sustentável** (o anti vibe
 | **`eng-ia-loop`** | Projeta loops de agente seguros (meta, verificação, memória, fuga). Aula 12. | transversal |
 | **`eng-ia-micro-decisoes`** | Ledger de atritos/acordos humano-IA (4 linhas, ~30 tokens). Novidade da aula 08. | transversal |
 | **`eng-ia-quality-gate`** | Portão pré-commit. Agrega `code-review` + `code-philosophy` + checklist Sandeco + pre-commit/secret-scan. | 4 |
+| **`eng-ia-deploy`** | Deploy seguro: Docker → VPS → CI/CD, pre-commit/secret-scan, blindagem de custo/portas. Aula 14. | 5 |
 
 ## Por que essas (e não mais)
 
@@ -40,6 +41,7 @@ code-philosophy       -> 5 Leis ao escrever                        (skill existe
 /eng-ia-loop          -> loops seguros (meta/verificação/memória/fuga; /go, reflection, Ralph)
 /eng-ia-quality-gate  -> portão antes do commit (Q10/Q11 de TDD e regressão; pre-commit/secret-scan)
 /eng-ia-micro-decisoes -> registra atritos (a qualquer momento)
+/eng-ia-deploy        -> fase 5: Docker -> VPS -> CI/CD, seguro (aula 14)
 ```
 
 Fonte: transcrições em `Engenharia de IA - SANDECO/transcricoes/aula-01..14.txt` + notas em `notas/`. As novidades (micro-decisões, skill-vs-hook, token-como-custo) concentram-se na **aula 08**. A **aula 09** aprofunda SDD e introduz **TDD com a pirâmide de 5 camadas**. A **aula 10** refina Agent Harness (guardrail ⊂ harness). A **aula 11** traz os frameworks **BMAD/SpecKit/Reversa** (→ `eng-ia-frameworks`; TDD não vem por padrão, injeta-se na Constituição). A **aula 12** traz a **engenharia de looping** (→ `eng-ia-loop`). A **aula 13** fecha o livro (cap. 9) com **DevContainer + YOLO** (execução autônoma segura). A **aula 14** (extra, convidado) cobre **deploy em VPS** (AWS LightSail, Docker, Git/CI-CD, pre-commit) — DevOps que alimenta a fase 5.

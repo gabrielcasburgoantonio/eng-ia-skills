@@ -18,9 +18,10 @@ Três frameworks de spec-driven development ficam **em cima do Agent Harness** e
 
 | Situação | Framework |
 |---|---|
-| Código **legado** → gerar spec do existente | **Reversa** (só lê o legado, nunca altera — diretiva no CLAUDE.md) |
-| Greenfield, spec versionada, direto, **token-sensível** | **SpecKit** (do GitHub) ou **Reversa Anil** |
-| Exploração ágil, brainstorm rico com personas | **BMAD** (mas é **verboso → gasta token**) |
+| Código **legado** → gerar spec do existente | **Reversa** (ciclo reverse; só lê o legado, nunca altera — diretiva no CLAUDE.md) |
+| Greenfield, spec versionada, direto, **token-sensível** | **Reversa** (ciclo forward: `/reversa-new`) ou **SpecKit** (do GitHub) |
+| Exploração ágil, brainstorm rico com personas | **BMAD** — ou o **Ideation Team do Reversa** (`/reversa-new`), mais enxuto que BMAD |
+| Delta pequeno numa base já entendida | **`reversa-code-express`** (spec fina + código numa passada) |
 
 Recomendação do Sandeco: **SpecKit ou Reversa > BMAD** (verbosidade). Não use dois no mesmo projeto — escolha um.
 
@@ -28,7 +29,7 @@ Recomendação do Sandeco: **SpecKit ou Reversa > BMAD** (verbosidade). Não use
 
 - **BMAD** — time ágil de personas (Scrum). Fluxo: **Brief (Analista/Mary) → PRD (PM) → Arquitetura → Stories (Scrum Master) → Código (Dev) → QA**. Cada story = 1 feature. Instala com `bmad method install` (Node); pastas `.bmad`/`bmad output`; `/bmad help` posiciona no fluxo. Trabalha com skills.
 - **SpecKit** — esteira de specs versionada (SDD puro). Sequência: **Constituição → Specify → Plan → Task → Implementação**, com **gate entre etapas** (`clarify` em specify→plan; análise de coerência em task→impl). Instala via `uv` (`uv tool install specify-cli` → `specify init <projeto>`); pastas `.specify`/`specs` (por feature). Aceita **um** harness.
-- **Reversa / Reversa Anil** — do Sandeco. Diferencial: **reverse** (spec de legado). **Reversa Anil** = equivalente ao SpecKit p/ greenfield. `github.com/sandeco/reversa`.
+- **Reversa** — do Sandeco (`github.com/sandeco/reversa`). Hoje cobre **os dois sentidos**: (a) **reverse** — gera spec de código legado (`/reversa`, nunca altera o legado); (b) **forward** — greenfield do zero (`/reversa-new`): **Ideation Team** (ideator→researcher→…, brainstorm estruturado) → requirements → plan → to-do → coding → **sync** (converge entrega na extração) + **regression-watch**. Rota rápida: **`reversa-code-express`** (delta pequeno). Time de **debugger** (5 agentes) e de **quality/refactor** (audit, optimize, prune, refactor, simplify, standardize). É o framework mais completo dos três — e é atualizado upstream (confira a versão no `_tracking.json`).
 
 ## Injetar TDD e regras (crítico)
 

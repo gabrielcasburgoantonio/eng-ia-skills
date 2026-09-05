@@ -130,6 +130,8 @@ Use este formato:
 - Use `eng-ia-frameworks` quando o harness for operado por um framework SDD (BMAD/SpecKit/Reversa).
 - Use `eng-ia-loop` quando a camada de loop/verificacao precisar ser projetada em detalhe.
 
+**Reversa como harness de referencia (estude o padrao):** o framework Reversa e um exemplo vivo e completo das camadas acima — `.reversa/state.json` (memoria + checkpoint entre sessoes), selos 🟢 CONFIRMADO / 🟡 INFERIDO / 🔴 LACUNA (verificacao + confianca), `regression-watch.md` (fallback contra regressao semantica), diretiva "nunca apague/modifique o legado" (guardrail por diretiva, nao por permissao), pausas proativas antes de agente pesado (observabilidade de contexto). Quando montar um harness, vale copiar esses mecanismos.
+
 ## Execucao autonoma segura (sandbox concreto — aula 13)
 
 O guardrail de sandbox/limite de pasta se materializa em **DevContainer + YOLO mode**:
