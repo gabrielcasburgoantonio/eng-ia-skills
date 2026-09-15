@@ -41,7 +41,7 @@ Cada item é **pass/fail**. Falha não bloqueia automaticamente — vira um acha
 | Q9 | Micro-decisão | Houve atrito/decisão de arquitetura nesta sessão que não foi registrado em `.eng-ia/micro-decisoes.md`? |
 | Q10 | TDD | Existe teste para o código entregue, e ele foi escrito antes (ou pelo menos junto)? Cobre as camadas relevantes da pirâmide (unitário/integração/contrato/end-to-end)? |
 | Q11 | Regressão | Bugs reportados nesta sessão (ou anteriores que tocaram este código) viraram caso de regressão em `tests/`? |
-| Q12 | Segredos & pre-commit | Nenhuma chave/API/segredo no diff? Há `.pre-commit` com secret-scan + format (ruff) barrando o commit? Repo privado? (aula 14) |
+| Q12 | Segredos & pre-commit | Nenhuma chave/API/segredo no diff? Há `.pre-commit` com secret-scan + format (ruff) barrando o commit? Repo privado? (aula 14). **Se for app web, o diff limpo não basta** — a chave pode estar no *bundle* que vai pro navegador: `16-seguranca/segredos-no-front/` |
 | Q13 | Loop seguro | Se há loop de agente (`/go`, reflection), ele tem aferidor de saída, fuga/stop-early e verificador testado? Meta subjetiva usa 2º LLM como juiz? (aula 12 — ver `eng-ia-loop`) |
 
 ## Procedimento
@@ -79,6 +79,18 @@ Cada item é **pass/fail**. Falha não bloqueia automaticamente — vira um acha
 - Bloqueadores: <lista>
 - Recomendações: <lista>
 ```
+
+## Se o que está sendo entregue é uma aplicação web
+
+O checklist Q1–Q13 cobre **código**. Ele não cobre o que só aparece depois que a aplicação está servindo gente. Antes de dar PASS em algo que vai pro navegador, rode as três validações de `16-seguranca/seguranca-app/`:
+
+| Validação | Pergunta | Skill |
+|---|---|---|
+| **Segredo no front** | abrindo o DevTools do site em produção, dá pra achar chave/token no bundle? | `16-seguranca/segredos-no-front/` |
+| **Sessão e cookies** | apagar o cookie derruba a sessão? A API responde sem o header de auth? Trocar o ID mostra dado de outro? | `16-seguranca/sessao-e-cookies/` |
+| **Rate limit** | rota de login/cadastro/IA aguenta 200 requisições em 10 segundos sem cobrar você por isso? | `16-seguranca/rate-limit-e-abuso/` |
+
+Não é redundância com o Q12: **Q12 olha o diff, essas três olham o que está no ar.** Um repo com segredo zero no histórico ainda pode publicar a chave no bundle.
 
 ## O que NÃO fazer
 

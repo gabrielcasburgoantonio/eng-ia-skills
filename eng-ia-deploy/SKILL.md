@@ -50,6 +50,10 @@ Checklist obrigatorio antes de deixar no ar:
 6. **Banco nunca exposto** — banco aberto na internet e invadido em ~1 dia (relatos de resgate em Bitcoin).
 7. **App fora da home** do usuario — criar `/data` (com `sudo`), acessivel a todos.
 
+> **Onde guardar o segredo:** `.env` local + secret manager do provedor, **nunca** no bundle que vai pro navegador. Variavel com prefixo publico (`NEXT_PUBLIC_`, `VITE_`) e **codigo aberto por definicao**. Como conferir no site que ja esta no ar e o que fazer se ja vazou (rotacionar antes de remover): `16-seguranca/segredos-no-front/`.
+
+> **Rate limit e a porta que o firewall nao fecha:** as portas acima protegem a maquina; elas nao impedem alguem de bater 50 mil vezes na sua rota de `/api/chat` e gastar seu credito de LLM. Defesa em duas camadas (borda no Cloudflare + aplicacao) e limite por rota: `16-seguranca/rate-limit-e-abuso/`.
+
 ## 4. Git / CI-CD (a parte que mais toca o metodo)
 
 - **Repositorio privado** sempre. **`main` protegida** (so 1-2 pessoas dao merge) + `develop` (homologacao) + branch por feature.
@@ -79,6 +83,8 @@ Ao chegar na fase de deploy, registre as regras como diretiva (nao como permissa
 - `eng-ia-quality-gate` — o **Q12** (pre-commit/secret-scan) e barrado ANTES; aqui ele vira operacao de entrega.
 - `eng-ia-bootstrap` — pode ja ter oferecido `.pre-commit-config.yaml`, `Dockerfile` e `docker-compose.yml` minimos no comeco do projeto.
 - `eng-ia-agent-harness` — DevContainer (aula 13) e primo do Docker: isolamento; o mesmo raciocinio de "gaiola descartavel".
+- `16-seguranca/seguranca-app/` — as 3 validacoes da aplicacao **no ar** (segredo no bundle, sessao/cookie, rate limit). O Q12 olha o diff; estas olham o que o navegador recebe.
+- `07-arquitetura-produto/prontidao-producao/` — depois de subir: o erro em producao chega em alguem? Observabilidade, lint/contrato de arquitetura, teste nas 3 alturas, Issue->PR.
 
 ## Origem pedagogica
 

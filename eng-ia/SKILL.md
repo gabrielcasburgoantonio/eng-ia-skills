@@ -45,7 +45,9 @@ Princípios que atravessam todas as fases:
 | 3a. Teste primeiro (TDD) | Escrever o teste a partir da spec antes do código. Red/Green/Refactor. Pirâmide: unitário → integração → contrato → end-to-end → regressão | (regra global no CLAUDE.md via `eng-ia-bootstrap`) |
 | 3b. Modelagem + código | Aplicar as 5 Leis da Defesa Elegante ao gerar/revisar lógica | **`code-philosophy`** |
 | 4. Quality gate | Revisão antes de subir: corretude/segurança/perf/estilo + critérios Sandeco + verificação de TDD | **`eng-ia-quality-gate`** (que chama `code-review` + `code-philosophy`) |
+| 4.5 Segurança da aplicação | Se o que vai subir é **web**: segredo vazando no bundle, sessão que não morre, rota pública sem rate limit. A IA escreve o que você pediu — não escreve o que você não pediu | **`16-seguranca/seguranca-app/`** (índice das 3 validações) |
 | 5. Deploy | Colocar no ar (Docker → VPS → CI/CD), com segredos e branch/PR protegidos | **`eng-ia-deploy`** (aula 14) |
+| 6. Prontidão para produção | Funcionar é o piso: rastreabilidade Issue→PR, observabilidade (o erro chega em alguém?), lint + contrato de arquitetura, teste nas 3 alturas | **`07-arquitetura-produto/prontidao-producao/`** |
 | Transversal | Automatizar tarefa iterativa (meta + verificação + fuga) em loop seguro | **`eng-ia-loop`** |
 | Transversal | Registrar atritos e acordos humano-IA ao longo de tudo | **`eng-ia-micro-decisoes`** |
 
